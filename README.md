@@ -37,3 +37,9 @@ instalar wordpress ( limpa em localhost )
 <p>Ativação, desativação e desinstalação</p>
 <p>Links para estudo e pesquisa :</p>
 <p>http://codex.wordpress.org/Plugin_API#Activation.2FDeactivation.2FUninstall</p>
+
+<h4>[AULA 04]</h4>
+
+<p>Desenvolvimento do plugin de posts relacionados</p>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Class_Reference/WP_Query</p>
