@@ -30,3 +30,10 @@ instalar wordpress ( limpa em localhost )
 <p>Links para estudo e pesquisa :</p>
 <p>http://codex.wordpress.org/Plugin_API/Filter_Reference</p>
 <p>http://codex.wordpress.org/Plugin_API/Action_Reference</p>
+
+
+<h4>[AULA 03]</h4>
+
+<p>Ativação, desativação e desinstalação</p>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Plugin_API#Activation.2FDeactivation.2FUninstall</p>
