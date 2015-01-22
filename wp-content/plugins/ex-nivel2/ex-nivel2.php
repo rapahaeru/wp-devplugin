@@ -9,11 +9,22 @@
  */
 
 // sempre utilize em um shortcode o item "return" ao inves de "echo".
-function exTwitter($atributes){
-	if (!isset($atributes['user']) || $atributes['user'] == "")
-		$atributes['user'] = 'contapadrao';
+function exTwitter($atributes, $content){
+	if (!isset($atributes['user']) || $atributes['user'] == "") $atributes['user'] = 'contapadrao';
+	if (!isset($content) || $content == "") $content = 'Siga-me no Twitter';
+	// if (!isset($atributes['txt']) || $atributes['txt'] == "") $atributes['txt'] = 'Siga-me no Twitter';
+
+	// $atributes = shortcode_atts(array(
+	// 		'user' => 'contapadrao',
+	// 		'content' => !empty($content) ? $content : 'Siga-me no Twitter',
+	// 	),$atributes);
+
+	//var_dump($atributes);
+
+	//extract($atributes);// exporta as variáveis do array
+
 	
-	return "<p> <a href='http://twitter.com/".$atributes['user']."'> Siga-me no Twitter </a> </p>";
+	return "<p> <a href='http://twitter.com/".$atributes['user']."'> ".$content." </a> </p>";
 }
 
 

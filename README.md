@@ -46,6 +46,12 @@ instalar wordpress ( limpa em localhost )
 
 <h4>[AULA 05]</h4>
 
-<p>Shortcodes</p>
+<p>Shortcodes - atributos</p>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Shortcode_API</p>
+
+<h4>[AULA 06]</h4>
+
+<p>Shortcodes - conteudo</p>
 <p>Links para estudo e pesquisa :</p>
 <p>http://codex.wordpress.org/Shortcode_API</p>
