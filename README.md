@@ -43,3 +43,9 @@ instalar wordpress ( limpa em localhost )
 <p>Desenvolvimento do plugin de posts relacionados</p>
 <p>Links para estudo e pesquisa :</p>
 <p>http://codex.wordpress.org/Class_Reference/WP_Query</p>
+
+<h4>[AULA 05]</h4>
+
+<p>Shortcodes</p>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Shortcode_API</p>
