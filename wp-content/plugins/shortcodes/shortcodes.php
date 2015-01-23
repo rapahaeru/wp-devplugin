@@ -30,3 +30,41 @@ function boxcss($atts, $content=NULL){
 	return '<div class="'. $tipo.' '.$radius.' '.$sombra .'" >'. $content.'</div>';
 }
 add_shortcode('box', 'boxcss');
+
+
+function seriePosts($atts,$content=NULL){
+
+	extract(shortcode_atts(array(
+		'titulo' => NULL,
+	), $atts));	
+
+	if ($titulo==NULL || !is_single() || is_feed()) return;
+
+	global $wpdb; // declarar essa variavel sempre que for utilizar o banco de dados
+
+	//post_status = publish => somente os posts publicados
+	//post_type = post => somente posts, não sendo páginas e etc.
+	$sql = "SELECT ID, post_title, post_name FROM $wpdb->posts WHERE post_status='publish' 
+			AND post_type='post' AND post_title LIKE '%$titulo%' 
+			ORDER BY post_date ASC";
+	//$teste = CONSTANTE_NAO_EXISTENTE; // teste para analizar log criado /wp-content/debug
+	$resultado = $wpdb->get_results($sql);
+	if (sizeof($resultado) > 0){
+		$urlBlog = get_bloginfo('url') . '/'; // função nativa do WP
+
+		$output = '<h2> Mais posts desta série (Mesmo titulo) </h2>';
+		$output .= '<ul>';
+		//var_dump($resultado);
+		foreach ($resultado as $post) {
+			if (get_the_ID() == $post->ID){ //função nativa do WP
+				$output .= '<li><em>'.$post->post_title.'</em></li>';
+			}else{
+				$output .= '<li><a href="'.$urlBlog.$post->post_name.'" title="'.$post->post_title.'">'.$post->post_title.'</a></li>';
+			}
+		}
+		$output .= '</ul>';
+		return $output;
+	}
+}
+
+add_shortcode('serie', 'seriePosts');

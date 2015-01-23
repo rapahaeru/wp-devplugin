@@ -63,3 +63,13 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Function_Reference/wp_register_style</p>
 <p>http://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts</p>
 
+
+<h4>[AULA 09]</h4>
+
+<p>Shortcodes - Mais exemplos e uso do banco de dados ($wpdb)</p>
+<p>Utilizando também a constante WP_DEBUG (wp-config) com criação de log (WP_DEBUG_LOG)</p>
+<p>Debug para ser utilizado em produção</p>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Function_Reference/wp_register_style</p>
+<p>http://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts</p>
+
