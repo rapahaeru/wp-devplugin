@@ -24,18 +24,43 @@ class Exemplo extends WP_Widget{
 
 	// responsável por montar os formularios dos widgets
 	// aparece no Admin
-	function form(){
+	// recebe 1 paremetro
+	function form($instance){
+		//var_dump($instance);
+		extract($instance); ?>
 
-		echo "exemplo de exibição do form()";
+		<p>
+			<label for="">Titulo :</label>
+			<input type="text" class="widefat" id="<?=$this->get_field_id('title')?>" name="<?=$this->get_field_name('title')?>" value="<? if( isset($title)) echo esc_attr($title)?>">
+		</p>
+
+		<p>
+			<label for="">Descrição :</label>
+			<textarea type="text" class="widefat" id="<?=$this->get_field_id('desc')?>" name="<?=$this->get_field_name('desc')?>"><? if( isset($desc)) echo esc_attr($desc)?></textarea>	
+		</p>		
+
+		<?php
+
+		//echo "exemplo de exibição do form()";
 
 	}
 
 	// output do widget
 	// onde será mostrado no blog seu widget
 	// aparece no blog
-	function widget(){
+	// recebe 2 parametros
+	function widget($args, $instance){
+		//var_dump($args);
+		//var_dump($instance);
+		//echo "exemplo de exibição do widget()";
+		extract($args);
+		extract($instance);
+		if (empty($title)) $title = "Título padrão";
+		echo $before_widget;
+			echo $before_title . $title . $after_title;
+			echo "<p>" . $desc . "</p>";
+		echo $after_widget;
 
-		echo "exemplo de exibição do widget()";
 
 	}
 
