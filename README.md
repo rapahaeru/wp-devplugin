@@ -89,3 +89,17 @@ instalar wordpress ( limpa em localhost )
 <h4>[AULA 11]</h4>
 <p>Widgets - Form() e widget()</p>
 
+<h4>[AULA 12]</h4>
+<p>Widgets - Desenvolvimento</p>
+<p>Inicio da implementação de novas áreas no config. Onde serão criados novos itens de menu e campos</p>
+<p>Área onde o usuário pode adicionar banners publicitarios globais ( para todo o blog ) ou específico para cada autor</p>
+<ul>
+	<li>Criação de itens dos menus na área de configuração</li>
+	<li>Criação de itens dos menus na área de usuários</li>
+</ul>
+<p>Links para estudo e pesquisa :</p>
+<p>http://codex.wordpress.org/Roles_and_Capabilities</p>
+<p>http://codex.wordpress.org/Function_Reference/add_options_page</p>
+<p>http://codex.wordpress.org/Function_Reference/add_users_page</p>
+
+
