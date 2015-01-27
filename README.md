@@ -73,3 +73,16 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Function_Reference/wp_register_style</p>
 <p>http://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts</p>
 
+<h4>[AULA 09]</h4>
+
+<p>Widgets - introdução as classes</p>
+<p>Nessa aula foi introduzido como desenvolver um widget.</p>
+<p>Fora criada uma classe que extende a autonomia a classe mãe WP_Widget(),</p>
+<p>Nela há uma estrutura básica de métodos contrução do widget</p>
+<code>__construct()</code>
+<p>Responsável por declarar os conteúdos do widget</p>
+<code>form()</code>
+<p>Responsável pela esturtura que será exibida no admin, como por ex os inputs que serão adicionados</p>
+<code>widget()</code>
+<p>Responsável pela parte que será exibida no template ( front do blog)</p>
+
