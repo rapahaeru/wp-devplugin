@@ -18,6 +18,7 @@ add_action('widgets_init', array('Publicidade', 'register')); // orientado ('nom
 // chama tanto scripts quanto estilos para ser carregado
 add_action('wp_enqueue_scripts', array('Publicidade','loadcss')); // orientado ('nome da classe', 'nome do metodo')
 add_action('admin_menu',array('Publicidade','makeMenu')); // orientado ('nome da classe', 'nome do metodo')
+add_filter('the_content', array('Publicidade','adPost'));
 
 // função extendida nativa para widgets
 class Publicidade extends WP_Widget{
@@ -60,13 +61,26 @@ class Publicidade extends WP_Widget{
 		//echo "exemplo de exibição do widget()";
 		extract($args);
 		extract($instance);
-		if (empty($title)) $title = "Publicidade";
-		echo $before_widget;
-			echo $before_title . $title . $after_title;
-			echo "<div class='ad-sidebar'> Anúncio aqui </div>";
-		echo $after_widget;
+
+		if(rb_printAds('rb_ad_sidebar')!=false):
+
+			if (empty($title)) $title = "Publicidade";
+			echo $before_widget;
+				echo $before_title . $title . $after_title;
+				echo "<div class='ad-sidebar'> ".rb_printAds('rb_ad_sidebar')." </div>";
+			echo $after_widget;
+
+			endif;
 
 
+	}
+
+	//exibe o anuncio antes do conteudo do post
+	function adPost($content){
+
+		if (!is_single() || rb_printAds('rb_ad_posts')==false) return $content;
+
+		return '<div class="ad-posts">' . rb_printAds('rb_ad_posts') . '</div>' . $content ;
 	}
 
 	// informa o WP que foi criado um widget e quero utilizar no blog
@@ -93,8 +107,21 @@ class Publicidade extends WP_Widget{
 
 	// funcoa que gera tela de config para o adm do site
 	function configAdm(){
+
+		if ( isset($_POST['save_config']) && $_POST['save_config']=='confirm' ):
+			// utilizar um prefixo aqui para nao haver problema de conflito com outros plugins ativos
+			// no caso, fora utilizado o prefixo rb_ mais o name do campo ad_posts
+			update_option('rb_ad_posts',$_POST['ad_posts']);
+			update_option('rb_ad_sidebar',$_POST['ad_sidebar']);
+			$warning = '<div class="updated"><p><strong>Suas configurações foram salvas com sucesso!</strong></p></div>';
+		endif;
+
 		?>
+
+
 		<div class="wrap">
+			<?php if ( isset($warning) ) echo $warning; ?>
+
 			<h2>Configuração global de publicidade</h2>
 			<form method="POST" action="<?=$_SERVER['REQUEST_URI']?>">
 				<h3>Configure seus anúncios abaixo</h3>
@@ -102,14 +129,14 @@ class Publicidade extends WP_Widget{
 					<tr valign="top">
 						<th scope="row"><label for="">Anúncio de 300x250 exibido nos posts</label></th>
 						<td>
-							<textarea name="ad_posts" id="" cols="100" rows="5"></textarea>
+							<textarea name="ad_posts" id="" cols="100" rows="5"><?=get_option('rb_ad_posts')?></textarea>
 							<p class="description">Insira o código de um banner de 300x250 pixels que será exibido junto ao conteúdo de cada post</p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row"><label for="">Anúncio de 250x250 exibido na sidebar</label></th>
 						<td>
-							<textarea name="ad_posts" id="" cols="100" rows="5"></textarea>
+							<textarea name="ad_sidebar" id="" cols="100" rows="5"><?=get_option('rb_ad_sidebar')?></textarea>
 							<p class="description">Insira o código de um banner de 300x250 pixels que será exibido na sidebar do blog</p>
 						</td>
 					</tr>
@@ -126,8 +153,23 @@ class Publicidade extends WP_Widget{
 
 	// funcoa que gera tela de config para os autores
 	function configUser(){
+
+		$userId = get_current_user_id(); // pega o id do usuario logado no painel
+		if ( isset($_POST['save_config']) && $_POST['save_config']=='confirm' ):
+			// utilizar um prefixo aqui para nao haver problema de conflito com outros plugins ativos
+			// no caso, fora utilizado o prefixo rb_ mais o name do campo ad_posts
+			update_user_meta($userId, 'rb_ad_posts',$_POST['ad_posts']);
+			update_user_meta($userId, 'rb_ad_sidebar',$_POST['ad_sidebar']);
+
+
+			$warning = '<div class="updated"><p><strong>Suas configurações foram salvas com sucesso!</strong></p></div>';
+		endif;
+
 		?>
+
+
 		<div class="wrap">
+			<?php if ( isset($warning) ) echo $warning; ?>
 			<h2>Configuração de publicidade</h2>
 			<form method="POST" action="<?=$_SERVER['REQUEST_URI']?>">
 				<h3>Configure seus anúncios abaixo</h3>
@@ -135,14 +177,14 @@ class Publicidade extends WP_Widget{
 					<tr valign="top">
 						<th scope="row"><label for="">Anúncio de 300x250 exibido nos posts</label></th>
 						<td>
-							<textarea name="ad_posts" id="" cols="100" rows="5"></textarea>
+							<textarea name="ad_posts" id="" cols="100" rows="5"><?=get_user_meta($userId,'rb_ad_posts',TRUE)?></textarea>
 							<p class="description">Insira o código de um banner de 300x250 pixels que será exibido junto ao conteúdo de cada post</p>
 						</td>
 					</tr>
 					<tr valign="top">
 						<th scope="row"><label for="">Anúncio de 250x250 exibido na sidebar</label></th>
 						<td>
-							<textarea name="ad_posts" id="" cols="100" rows="5"></textarea>
+							<textarea name="ad_sidebar" id="" cols="100" rows="5"><?=get_user_meta($userId,'rb_ad_sidebar',TRUE)?></textarea>
 							<p class="description">Insira o código de um banner de 300x250 pixels que será exibido na sidebar do blog</p>
 						</td>
 					</tr>
@@ -156,6 +198,36 @@ class Publicidade extends WP_Widget{
 
 		<?php
 	}	
+
+}
+
+function rb_printAds($name='rb_ad_posts'){
+
+	$adAuthor = get_the_author_meta($name);
+	$adAdmin = get_option($name);
+
+	if(is_single()): // post
+
+		if ($adAuthor):
+			return stripslashes($adAuthor);
+		else:
+			if($adAdmin):
+				return stripslashes($adAdmin);
+			else:
+				return false;
+			endif;
+
+		endif;	
+	
+	else:
+
+		if($adAdmin):
+			return stripslashes($adAdmin);
+		else:
+			return false;
+		endif;
+
+	endif;
 
 }
 

@@ -102,4 +102,15 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Function_Reference/add_options_page</p>
 <p>http://codex.wordpress.org/Function_Reference/add_users_page</p>
 
-
+<h4>[AULA 13]</h4>
+<p>Widgets - Desenvolvimento (Banco de dados)</p>
+<ul>
+	<li>Inserção no banco de dados dos novos campos</li>
+	<li>exibicao no tema do conteudo inserido ( através de widget também )</li>
+</ul>
+<p>Funções para a área de configurações (option) do painel </p>
+<p>http://codex.wordpress.org/Function_Reference/update_option</p>
+<p>http://codex.wordpress.org/Function_Reference/get_option</p>
+<p>Funções para a área de usuários (user) do painel </p>
+<p>http://codex.wordpress.org/Function_Reference/get_user_meta</p>
+<p><p>http://codex.wordpress.org/Function_Reference/update_user_meta</p></p>
