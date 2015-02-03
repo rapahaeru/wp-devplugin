@@ -113,4 +113,10 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Function_Reference/get_option</p>
 <p>Funções para a área de usuários (user) do painel </p>
 <p>http://codex.wordpress.org/Function_Reference/get_user_meta</p>
-<p><p>http://codex.wordpress.org/Function_Reference/update_user_meta</p></p>
+<p>http://codex.wordpress.org/Function_Reference/update_user_meta</p>
+
+<h4>[AULA 14]</h4>
+<p>Programando uma Cron</p>
+<p>http://codex.wordpress.org/Function_Reference/wp_cron</p>
+<p>http://codex.wordpress.org/Function_Reference/wp_schedule_event</p>
+<p>http://codex.wordpress.org/Category:Functions</p>
