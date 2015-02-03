@@ -120,3 +120,15 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Function_Reference/wp_cron</p>
 <p>http://codex.wordpress.org/Function_Reference/wp_schedule_event</p>
 <p>http://codex.wordpress.org/Category:Functions</p>
+
+
+<h4>[AULA 15]</h4>
+<p>Programando uma Cron</p>
+<p>
+	<ul>
+		<li>Agendamento de disparo de emails a cada 2 minutos</li>
+		<li>Lista todos os agendamentos ativos (_get_cron_array)</li>
+	</ul>
+</p>
+<p>http://codex.wordpress.org/Function_Reference/wp_schedule_single_event</p>
+<p>http://codex.wordpress.org/Function_Reference/add_options_page</p>
