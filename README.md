@@ -132,3 +132,7 @@ instalar wordpress ( limpa em localhost )
 </p>
 <p>http://codex.wordpress.org/Function_Reference/wp_schedule_single_event</p>
 <p>http://codex.wordpress.org/Function_Reference/add_options_page</p>
+
+<h4>[AULA 15]</h4>
+<p>Limpando e otimizando o BD</p>
+<p>Será criada uma option para prenchimento das necessidades de otimização do banco</p>
