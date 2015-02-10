@@ -9,6 +9,66 @@
  */
 
 
+function rb_activation(){
+	// se nao ha evento agendado no rb_cron_hook
+	if (!wp_next_scheduled('rb_cron_otimizador')):
+		// agendar agora com recorrencia de hora e chamando o rb_cron_hook
+		wp_schedule_event(time(),'daily','rb_cron_otimizador');
+
+	endif;
+}
+// quando o plugin é ativado, executa essa função
+register_activation_hook(__FILE__,'rb_activation'); //arquivo atual
+
+function rb_deactivation(){
+	// recebe o time do hook ('rb_cron_hook') registrado anteriormente
+	$next_exec = wp_next_scheduled('rb_cron_otimizador');
+	//desagendar, remover um agendamento
+	wp_unschedule_event($next_exec,'rb_cron_otimizador');
+}
+//quando o plugin for desativado, executa função
+// ATENCAO : toda vez que o WP é atualizado, ele desatualiza todos os plugins
+// ele é util para limpar agendamentos
+register_deactivation_hook(__FILE__,'rb_deactivation'); //arquivo atual
+
+function rb_otmizador(){
+
+	global $wpdb;
+	if (get_option('rb_post_revisao')==1) :
+		// quando for revisao
+		$wpdb->query("DELETE FROM $wpdb->posts WHERE post_type = 'revision' ");
+	endif;
+	if (get_option('rb_post_autodraft')==1) :
+		// quando for rascunho
+		$wpdb->query("DELETE FROM $wpdb->posts WHERE post_type = 'auto-draft' ");
+	endif;
+	if (get_option('rb_com_agent')==1) :
+		$wpdb->query("UPDATE $wpdb->comments SET comment_agent = '' ");
+	endif;
+	if (get_option('rb_com_akismet')==1) :
+		$wpdb->query("DELETE FROM $wpdb->commentmeta WHERE meta_key like '%akismet%' ");
+	endif;
+	if (get_option('rb_com_metamorfo')==1) :
+		$wpdb->query("DELETE FROM $wpdb->commentmeta WHERE comment_id NOT IN (SELECT comment_id FROM $wpdb->comments)");
+	endif;
+	if (get_option('rb_com_lixo')==1) :
+		$wpdb->query("DELETE FROM $wpdb->comments WHERE comment_approved ='trash' ");
+	endif;
+	if (get_option('rb_geral_cache')==1) :
+		// dados de cache
+		$wpdb->query("DELETE FROM $wpdb->options WHERE option_name like '%_transient_%' ");
+	endif;
+	if (get_option('rb_geral_otimizar')==1) :
+		$tabelas = $wpdb->get_results("show tables", ARRAY_A); // pega o resultado em poe em uma array
+		foreach ($tabelas as $linha ) {
+			$tabela = array_values($linha);
+			$wpdb->query("REPAIR TABLE " . $tabela[0]);
+		}
+	endif;
+
+}
+
+add_action('rb_cron_otimizador','rb_otmizador');
 add_action('admin_menu','makeMenu'); // orientado ('nome da classe', 'nome do metodo')
 
 
@@ -25,6 +85,12 @@ function makeMenu(){
 function telaAdm(){
 
 	if ( isset($_POST['save_config']) && $_POST['save_config']=='confirm' ):
+		//debugando a query
+			//var_dump(get_option('rb_post_revisao'));
+		//global $wpdb;
+		//$tabelas = $wpdb->get_results("show tables", ARRAY_A); // pega o resultado em poe em uma array
+		//var_dump($tabelas);		
+	
 		// utilizar um prefixo aqui para nao haver problema de conflito com outros plugins ativos
 		// no caso, fora utilizado o prefixo rb_ mais o name do campo 
 		update_option('rb_post_revisao',(isset($_POST['post_revisao']) ? 1 : 0) );
