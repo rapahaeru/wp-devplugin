@@ -147,3 +147,14 @@ instalar wordpress ( limpa em localhost )
 <p>Referências utilizadas na aula</p>
 <p>http://codex.wordpress.org/Class_Reference/wpdb</p>
 <p>https://wordpress.org/support/topic/filtering-information-with-get_results</p>
+
+
+<h4>[AULA 18] - IMPORTANTE</h4>
+<p>Criando posts ( telas exclusivas ) Custom post types</p>
+<ul>
+	<li>Custom post types</li>
+	<li>register_post_type()</li>
+</ul>
+<p>Referências utilizadas na aula</p>
+<p>http://codex.wordpress.org/Post_Types</p>
+<p>http://codex.wordpress.org/Function_Reference/register_post_type</p>
