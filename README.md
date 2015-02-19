@@ -158,3 +158,9 @@ instalar wordpress ( limpa em localhost )
 <p>Referências utilizadas na aula</p>
 <p>http://codex.wordpress.org/Post_Types</p>
 <p>http://codex.wordpress.org/Function_Reference/register_post_type</p>
+
+
+<h4>[AULA 19] - Custom taxonomy</h4>
+<p>Criando categorias personalizadas</p>
+<p>Referências utilizadas na aula</p>
+<p>http://codex.wordpress.org/Function_Reference/register_taxonomy</p>

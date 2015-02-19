@@ -43,3 +43,36 @@ function ex_custom_portfolio(){
 
 add_action('init','ex_custom_portfolio');
 
+
+function ex_custom_setores(){
+	
+	//labels padrão disponivel no codex do register_post_types
+	$labels = array(
+					'name' 					=> 'Setor',
+					'singular_name' 		=> 'Setor',
+					'add_new_item' 			=> 'Adicionar setor',
+					'edit_item' 			=> 'Editar setor',
+					'new_item_name'			=> 'Adicionar setor',
+					'all_items' 			=> 'Todos os setores',
+					'update_item' 			=> 'Atualizar setor',
+					'menu_name' 			=> 'Setores'
+		);
+
+	$args = array(
+					'labels' => $labels,
+					'public'	=> true,
+					'hierarchical' => true 
+		);
+
+	//pode adicionar em que posts as categorias serão disponibilizadas, caso sejam os posts
+	// de blogs normais, basta adicionar "post", porém como é do exemplo,
+	// adicionaremos 'portfolio' (register post type registrada acima)
+	register_taxonomy('setor',array('portfolio'), $args); 
+	//register_taxonomy('setor',array('post'), $args); 
+
+}
+
+
+
+add_action('init','ex_custom_setores');
+
