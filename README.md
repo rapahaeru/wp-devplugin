@@ -164,3 +164,16 @@ instalar wordpress ( limpa em localhost )
 <p>Criando categorias personalizadas</p>
 <p>Referências utilizadas na aula</p>
 <p>http://codex.wordpress.org/Function_Reference/register_taxonomy</p>
+
+
+<h4>[AULA 20] - Custom Query</h4>
+
+<ul>
+	<li>hook pre_get_posts</li>
+	<li>flush_rewrite_rules()</li>
+	<li>register_activation_hook()</li>
+</ul>
+<p>Referências utilizadas na aula</p>
+<p>http://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts</p>
+<p>http://codex.wordpress.org/Function_Reference/flush_rewrite_rules</p>
+<p>http://codex.wordpress.org/Function_Reference/register_activation_hook</p>

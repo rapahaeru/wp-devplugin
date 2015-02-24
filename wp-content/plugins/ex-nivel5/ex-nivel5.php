@@ -76,3 +76,34 @@ function ex_custom_setores(){
 
 add_action('init','ex_custom_setores');
 
+
+
+function ex_custom_to_query($query){
+
+	if (is_admin()) return $query;
+
+	if ($query->is_main_query()): 
+	//if ($query->is_main_query() && !$query->is_home()): 	// não mostra na home
+		$query->set('post_type',array('post','page','portfolio')); // portfolio registrado acima.
+	endif;
+
+	return $query;
+
+}
+
+add_action('pre_get_posts','ex_custom_to_query');
+
+
+//funcao criada para automatizar a atualização dos links permanentes
+// explicacao : sempre que ativar o plugin, o usuario tem a necessidade de ir em configuracoes >> links permanentes
+// e salvar novamente, para que o WP se adapte as novas querys customizadas.
+// Esta função automatiza o processo para que o usuário não tenha essa necessidade
+function ex_ativacao(){
+
+	ex_custom_portfolio();
+	ex_custom_setores();
+	flush_rewrite_rules();
+
+}
+
+register_activation_hook(__FILE__,'ex_ativacao');
