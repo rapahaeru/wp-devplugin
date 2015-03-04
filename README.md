@@ -177,3 +177,20 @@ instalar wordpress ( limpa em localhost )
 <p>http://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts</p>
 <p>http://codex.wordpress.org/Function_Reference/flush_rewrite_rules</p>
 <p>http://codex.wordpress.org/Function_Reference/register_activation_hook</p>
+
+<h4>[AULA 21] - Plugin Filmes</h4>
+<p>Criação de novos custom post types</p>
+
+<ul>
+	<li>Filmes</li>
+	<li>Gêneros</li>
+	<li>Estúdios</li>
+</ul>
+<ul>
+	<li>Custom post types</li>
+	<li>register_post_type()</li>
+</ul>
+
+<p>Referências utilizadas na aula</p>
+<p>http://codex.wordpress.org/Post_Types</p>
+<p>http://codex.wordpress.org/Function_Reference/register_post_type</p>
