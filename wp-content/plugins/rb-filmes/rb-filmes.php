@@ -11,8 +11,12 @@
 define('PATH_PLUGIN', WP_PLUGIN_URL.'/rb-filmes/');
 
 function loadcss(){
-	wp_register_style('filmes',PATH_PLUGIN.'css/filmes.css'); // registra o restilo
-	wp_enqueue_style('filmes'); //carrega o estilo efetivamente ( precisa que seja registrada antes)
+	global $post;
+
+	if (is_single() && $post->post_type == 'filme'){
+		wp_register_style('filmes',PATH_PLUGIN.'css/filmes.css'); // registra o restilo
+		wp_enqueue_style('filmes'); //carrega o estilo efetivamente ( precisa que seja registrada antes)
+	}
 }
 
 add_action('wp_enqueue_scripts','loadcss'); // chama tanto scripts quanto estilos para ser carregado
@@ -65,6 +69,44 @@ function rb_custom_filmes(){
 
 
 add_action('init','rb_custom_filmes');
+
+function rb_exibir_filme($content){
+	global $post;
+
+	if (is_single() && $post->post_type == 'filme'){
+
+		if (has_post_thumbnail($post->ID)) $capa = get_the_post_thumbnail($post->ID, 'full');
+		// verifica se no meu post há uma taxonomy "genero" cadastrada
+		if (has_term('','genero',$post->ID)) $genero = get_the_term_list($post->ID,'genero','',', ','');
+		if (has_term('','estudio',$post->ID)) $estudio = get_the_term_list($post->ID,'estudio','',', ','');
+
+
+		// pega os dados do campo personalizado "duracao";
+		$duracao = get_post_meta($post->ID, 'duracao',TRUE);
+		$resumo = get_the_excerpt();
+		//$resumo = substr($resumo, 0, strpos($resumo, '<a'));
+
+		$conteudo_full = $content;
+
+		$content = '<div class="filme">';
+		if (isset($capa)) $content .= $capa;
+		if (isset($genero)) $content .= '<p> <strong> Gênero : </strong> ' . $genero . '</p>';
+		if (isset($estudio)) $content .= '<p> <strong> Estúdio : </strong> ' . $estudio . '</p>';
+		if (isset($duracao)) $content .= '<p> <strong> Duração : </strong> ' . $duracao . '</p>';
+		if (isset($resumo)) $content .= '<p> <strong> Resumo : </strong> ' . $resumo . '</p>';
+
+		$content .= '<h2> Descrição completa do filme </h2>' . $conteudo_full;
+
+
+		$content .= '</div>';
+
+	}
+	return $content;
+
+
+}
+
+add_filter('the_content','rb_exibir_filme');
 
 
 function rb_custom_estudios(){
