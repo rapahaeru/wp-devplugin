@@ -215,3 +215,13 @@ instalar wordpress ( limpa em localhost )
 <p>Referências utilizadas na aula</p>
 <p>http://codex.wordpress.org/Post_Types</p>
 <p>http://codex.wordpress.org/Function_Reference/register_post_type</p>
+
+<h4>[AULA 23] - Projeto final </h4>
+<p>Venda de posts via pagseguro ou paypal</p>
+<p>Cria uma estrutura parcialmente orientada de um plugin de forma mais profissional e organizada</p>
+<p>Nesta etapa foi feita a estrutura e as funções para criar a tabela no banco de dados necessária pro uso do plugin</p>
+
+<ul>
+	<li>update_option() / get_option() :: Criar uma flag pra confirmar algum tipo de opcao</li>
+	<li>Manipulando query</li>
+</ul>
