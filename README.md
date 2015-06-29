@@ -225,3 +225,17 @@ instalar wordpress ( limpa em localhost )
 	<li>update_option() / get_option() :: Criar uma flag pra confirmar algum tipo de opcao</li>
 	<li>Manipulando query</li>
 </ul>
+
+<h4>[AULA 24] - Projeto final </h4>
+<p>Venda de posts via pagseguro ou paypal</p>
+<p>Manipulando os shortcodes e aplicando restrições</p>
+
+<ul>
+	<li>shortcode_atts()</li>
+	<li>is_feed()</li>
+	<li>is_user_logged_in()</li>
+	<li>get_current_user_id()</li>
+	<li>get_the_author_meta()</li>
+	<li>current_user_can() // nivel de usuario</li>
+	<li>do_shortcode()</li>
+</ul>
